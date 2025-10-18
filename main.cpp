@@ -4,10 +4,12 @@
 #include <SFML/Graphics.hpp>
 
 static constexpr size_t WINDOW_HEIGHT = 800;	// px
-static constexpr size_t WINDOW_WIDTH = 600;	// px
+static constexpr size_t WINDOW_WIDTH = 600;		// px
 
 class Shape {
 };
+
+
 
 int main(int argc, char **argv) {
 	sf::RenderWindow window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "falling blocks");
@@ -27,6 +29,7 @@ int main(int argc, char **argv) {
 		// xxx GameObject update
 
 		// handle collisions
+
 		
 		// update game state
 
