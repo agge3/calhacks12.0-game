@@ -30,10 +30,10 @@ struct Cup {
 	sf::Vector2f velocity;
 
 	Cup(float m_x, float m_y) {
-		shape.setPosition(m_x, m_y);
+		shape.setPosition({m_x, m_y});
 		shape.setSize({cup_width, cup_height});
 		shape.setFillColor(sf::Color::White);
-		shape.setOrigin(cup_width / 2.f, cup_height / 2.f);
+		shape.setOrigin({cup_width / 2.f, cup_height / 2.f});
 	}
 
 	void update() {
@@ -78,13 +78,13 @@ struct FallingCircle : FallingShape {
 	FallingCircle(float m_x, float m_y, float s, const sf::Color& color, float spd) {
 		size = s;
 		speed = spd;
-		shape.setPosition(m_x, m_y);
+		shape.setPosition({m_x, m_y});
 		shape.setRadius(size / 2.f);
 		shape.setFillColor(color);
-		shape.setOrigin(size / 2.f, size / 2.f);
+		shape.setOrigin({size / 2.f, size / 2.f});
 	}
 
-	void update() override { shape.move(0, speed); }
+	void update() override { shape.move({0, speed}); }
 	void draw(sf::RenderWindow& window) override { window.draw(shape); }
 	float x() override { return shape.getPosition().x; }
 	float y() override { return shape.getPosition().y; }
@@ -100,13 +100,13 @@ struct FallingRectangle : FallingShape {
 	FallingRectangle(float m_x, float m_y, float s, const sf::Color& color, float spd) {
 		size = s;
 		speed = spd;
-		shape.setPosition(m_x, m_y);
+		shape.setPosition({m_x, m_y});
 		shape.setSize({size, size});
 		shape.setFillColor(color);
-		shape.setOrigin(size / 2.f, size / 2.f);
+		shape.setOrigin({size / 2.f, size / 2.f});
 	}
 
-	void update() override { shape.move(0, speed); }
+	void update() override { shape.move({0, speed}); }
 	void draw(sf::RenderWindow& window) override { window.draw(shape); }
 	float x() override { return shape.getPosition().x; }
 	float y() override { return shape.getPosition().y; }
@@ -122,14 +122,14 @@ struct FallingTriangle : FallingShape {
 	FallingTriangle(float m_x, float m_y, float s, const sf::Color& color, float spd) {
 		size = s;
 		speed = spd;
-		shape.setPosition(m_x, m_y);
+		shape.setPosition({m_x, m_y});
 		shape.setRadius(size / 2.f);
 		shape.setPointCount(3);
 		shape.setFillColor(color);
-		shape.setOrigin(size / 2.f, size / 2.f);
+		shape.setOrigin({size / 2.f, size / 2.f});
 	}
 
-	void update() override { shape.move(0, speed); }
+	void update() override { shape.move({0, speed}); }
 	void draw(sf::RenderWindow& window) override { window.draw(shape); }
 	float x() override { return shape.getPosition().x; }
 	float y() override { return shape.getPosition().y; }
@@ -177,8 +177,8 @@ int main(int argc, char **argv) {
 				window.close();
 			}
 			if (ev->is<sf::Event::KeyPressed>()) {
-				auto& key_ev = ev->getIf<sf::Event::KeyPressed>();
-				if (key_ev->code == sf::Keyboard::Escape) {
+				const auto* key_ev = ev->getIf<sf::Event::KeyPressed>();
+				if (key_ev->code == sf::Keyboard::Key::Escape) {
 					window.close();
 				}
 			}
