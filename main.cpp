@@ -10,14 +10,19 @@ class Shape {
 };
 
 int main(int argc, char **argv) {
-	sf::RenderWindow window{{WINDOW_WIDTH, WINDOW_HEIGHT, "falling blocks"}};
+	sf::RenderWindow window(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "falling blocks");
 	window.setFramerateLimit(60);
 
 	while (window.isOpen()) {
-		window.clear(Color::Black);
-		if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
-			break;
+		while (auto ev = window.pollEvent()) {
+			if (ev->is<sf::Event::Closed>()) {
+				window.close();
+			}
+			if (ev->is<sf::Event::KeyPressed>()) {
+				window.close();
+			}
 		}
+		window.clear(sf::Color::Black);
 
 		// xxx GameObject update
 
